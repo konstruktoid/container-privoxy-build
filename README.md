@@ -12,3 +12,9 @@ Website: http://www.privoxy.org/
 $ docker build -t privoxy -f Dockerfile .
 $ docker run --cap-drop=all --cap-add={setgid,setuid} -d -p 8118:8118 -t privoxy --no-daemon --user privoxy /etc/privoxy/config
 ```
+
+Autobuild:
+
+```sh
+docker run --cap-drop=all --cap-add={setgid,setuid} -d -p 8118:8118 konstruktoid/privoxy --no-daemon --user privoxy /etc/privoxy/config
+```
