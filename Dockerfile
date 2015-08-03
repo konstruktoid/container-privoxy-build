@@ -1,6 +1,6 @@
 # Force autobuild 1438639832
 
-FROM alpine:3.1
+FROM alpine:3.2
 
 RUN apk update && \
     apk upgrade && \
