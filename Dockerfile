@@ -1,4 +1,4 @@
-FROM alpine:3.2
+FROM konstruktoid/alpine
 
 RUN apk update && \
     apk upgrade && \
