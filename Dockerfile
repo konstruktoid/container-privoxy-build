@@ -7,5 +7,5 @@ RUN apk update && \
 COPY files/privoxy.config /etc/privoxy/config
 
 EXPOSE 8118
-ENTRYPOINT ["privoxy"]
+ENTRYPOINT ["/usr/sbin/privoxy"]
 CMD [""]
