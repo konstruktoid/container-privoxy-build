@@ -10,13 +10,13 @@ Website: http://www.privoxy.org/
 
 ```sh
 $ docker build -t privoxy -f Dockerfile .
-$ docker run --cap-drop=all --cap-add={setgid,setuid} -d -p 8118:8118 -t privoxy --no-daemon --user privoxy /etc/privoxy/config
+$ docker run --name privoxy --cap-drop=all --cap-add={setgid,setuid} --read-only --tmpfs /var/log/privoxy:rw,nosuid,noexec,nodev  -d -p 8118:8118 -t privoxy --no-daemon --user privoxy /etc/privoxy/config
 ```
 
 Autobuild:
 
 ```sh
-docker run --cap-drop=all --cap-add={setgid,setuid} -d -p 8118:8118 konstruktoid/privoxy --no-daemon --user privoxy /etc/privoxy/config
+docker run --name privoxy --cap-drop=all --cap-add={setgid,setuid} --read-only --tmpfs /var/log/privoxy:rw,nosuid,noexec,nodev  -d -p 8118:8118 konstruktoid/privoxy --no-daemon --user privoxy /etc/privoxy/config
 ```
 
 `./apparmor/` contains apparmor profile and toml file, `--security-opt="apparmor:docker-privoxy"`
