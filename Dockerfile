@@ -2,7 +2,8 @@ FROM konstruktoid/alpine
 
 RUN apk update && \
     apk upgrade && \
-    apk --update add privoxy
+    apk --update add privoxy && \
+    rm -rf /var/cache/apk/
 
 COPY files/privoxy.config /etc/privoxy/config
 
