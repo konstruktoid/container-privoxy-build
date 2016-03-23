@@ -1,22 +1,27 @@
-# Privoxy
+= Privoxy
 
-_"Privoxy is a non-caching web proxy with filtering capabilities for 
+[source]
+----
+"Privoxy is a non-caching web proxy with filtering capabilities for 
 enhancing privacy, manipulating cookies and modifying web page data 
 and HTTP headers before the page is rendered by the browser. Privoxy 
 is a "privacy enhancing proxy", filtering Web pages and removing 
-advertisements."_  
+advertisements."
+----
 
-Website: http://www.privoxy.org/  
+Website: http://www.privoxy.org/
 
-```sh
+[source]
+----
 $ docker build -t privoxy -f Dockerfile .
 $ docker run --name privoxy --cap-drop=all --cap-add={setgid,setuid} --read-only --tmpfs /var/log/privoxy:rw,nosuid,noexec,nodev  -d -p 8118:8118 -t privoxy --no-daemon --user privoxy /etc/privoxy/config
-```
+----
 
-Autobuild:
+== Autobuild
 
-```sh
+[source]
+----
 docker run --name privoxy --cap-drop=all --cap-add={setgid,setuid} --read-only --tmpfs /var/log/privoxy:rw,nosuid,noexec,nodev  -d -p 8118:8118 konstruktoid/privoxy --no-daemon --user privoxy /etc/privoxy/config
-```
+----
 
 `./apparmor/` contains apparmor profile and toml file, `--security-opt="apparmor:docker-privoxy"`
