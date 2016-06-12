@@ -5,9 +5,9 @@ RUN apk update && \
     apk --update add privoxy && \
     rm -rf /var/cache/apk/
 
-COPY files/privoxy.config /etc/privoxy/config
+COPY files/* /etc/privoxy/
 
-RUN chown privoxy:privoxy /etc/privoxy/config
+RUN chown -R privoxy:privoxy /etc/privoxy
 
 EXPOSE 8118
 ENTRYPOINT ["/usr/sbin/privoxy"]
