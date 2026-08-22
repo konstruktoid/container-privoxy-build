@@ -10,6 +10,9 @@ LABEL org.opencontainers.image.title="privoxy" \
 COPY files/ /etc/privoxy/
 
 # --no-cache leaves no index behind, so there is no /var/cache/apk to remove.
+# The packages are deliberately unpinned: the image exists to carry the newest
+# patched package set. See "Reproducibility" in README.md.
+# hadolint ignore=DL3018
 RUN apk --no-cache add curl privoxy && \
     mkdir -p /var/log/privoxy && \
     chown -R privoxy:privoxy /etc/privoxy /var/log/privoxy && \
@@ -20,6 +23,7 @@ HEALTHCHECK --interval=1m --timeout=3s --start-period=15s \
 
 EXPOSE 8118
 
+# privoxy, uid 100 and gid 101, created by the Alpine privoxy package.
 USER privoxy
 
 # privoxy takes the config file as a positional argument. The previous CMD [""]

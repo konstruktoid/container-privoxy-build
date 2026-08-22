@@ -16,8 +16,9 @@ Website: <https://www.privoxy.org/>
 
 ## Build and run
 
-The image runs as the unprivileged `privoxy` user and listens on 8118, so it
-needs no added capabilities.
+The image runs as the unprivileged `privoxy` user, uid 100 and gid 101 as
+created by the Alpine `privoxy` package, and listens on 8118, so it needs no
+added capabilities.
 
 ```sh
 $ podman build --no-cache -t konstruktoid/privoxy -f Dockerfile .
@@ -53,6 +54,18 @@ to stderr where the container runtime collects it.
 
 `./apparmor/` contains an AppArmor profile and its toml source, applied with
 `--security-opt="apparmor:docker-privoxy"`.
+
+## Reproducibility
+
+The base image is pinned by digest, so `FROM` always resolves to the same
+layers. The Alpine packages installed on top of it are deliberately _not_
+version pinned: the image exists to carry the newest patched `privoxy` and
+`curl`. Two builds a week apart will therefore contain different package
+versions and produce different image digests.
+
+Dependabot moves the base image digest forward; nothing freezes the packages.
+If you need a fixed set, build once and refer to the result by digest instead
+of by tag.
 
 ## Development
 
